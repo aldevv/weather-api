@@ -1,0 +1,17 @@
+version: "2"
+
+services:
+  weather:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      -  API=${API}
+      -  API_KEY=${API_KEY}
+      -  CACHE_HOST=${CACHE_HOST}
+      -  CACHE_PORT=${CACHE_PORT}
+  redis:
+    image: redis
+
+volumes:
+  redis-data:

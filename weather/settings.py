@@ -73,6 +73,19 @@ TEMPLATES = [
     },
 ]
 
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": f"redis://{os.getenv('CACHE_HOST')}:{os.getenv('CACHE_PORT')}/1",
+        "TIMEOUT": 120,
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "COMPRESSOR": "django_redis.compressors.zlib.ZlibCompressor",
+            "MAX_ENTRIES": 1000,
+        },
+    },
+}
+
 WSGI_APPLICATION = "weather.wsgi.application"
 
 

@@ -1,4 +1,5 @@
 from datetime import datetime
+from django.views.decorators.cache import cache_page
 
 
 def toFahrenheit(kelvin: float) -> float:
@@ -21,40 +22,40 @@ def unixTimeToHumanDate(unixtime: int) -> str:
     return datetime.utcfromtimestamp(unixtime).strftime("%Y-%m-%d %H:%M:%S")
 
 
-def getWindStrength(kmh: float, mph=False) -> str:
+def getWindStrength(speed: float, mph=False) -> str:
     if not mph:
-        mph = kmhToMph(kmh)
+        speed = kmhToMph(speed)
 
-    if mph < 1:
+    if speed < 1:
         return "calm"
-    if mph >= 1 and mph <= 3:
+    if speed >= 1 and speed <= 3:
         return "Light Air"
-    if mph >= 4 and mph <= 7:
+    if speed >= 4 and speed <= 7:
         return "Light Breeze"
-    if mph >= 8 and mph <= 12:
+    if speed >= 8 and speed <= 12:
         return "Gentle Breeze"
-    if mph >= 13 and mph <= 18:
+    if speed >= 13 and speed <= 18:
         return "Moderate Breeze"
-    if mph >= 19 and mph <= 24:
+    if speed >= 19 and speed <= 24:
         return "Fresh Breeze"
-    if mph >= 25 and mph <= 31:
+    if speed >= 25 and speed <= 31:
         return "Strong Breeze"
-    if mph >= 32 and mph <= 38:
+    if speed >= 32 and speed <= 38:
         return "Near Gale"
-    if mph >= 39 and mph <= 46:
+    if speed >= 39 and speed <= 46:
         return "Gale"
-    if mph >= 47 and mph <= 54:
+    if speed >= 47 and speed <= 54:
         return "Strong Gale"
-    if mph >= 55 and mph <= 63:
+    if speed >= 55 and speed <= 63:
         return "Whole Gale"
-    if mph >= 64 and mph <= 75:
+    if speed >= 64 and speed <= 75:
         return "Storm Force"
-    if mph >= 75:
+    if speed >= 75:
         return "Storm Force"
     return ""
 
 
-def degToCardinal(deg: int):
+def degToCardinal(deg: int) -> str:
     dirs = [
         "north",
         "north-northeast",

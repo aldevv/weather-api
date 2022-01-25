@@ -29,6 +29,6 @@ python manage.py test
 
 # Usage
 ```python
-curl --request GET \
+curl -L --request GET \
   --url 'http://localhost:8000/weather?city=Cali&country=co'
 ```
